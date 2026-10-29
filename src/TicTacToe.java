@@ -131,32 +131,66 @@ public class TicTacToe {
 
     // Returns true if all 8 ways to win have both an X and an O
     private static boolean isTie() {
-        int blocked = 0;
-        String line;
+        boolean retVal = true;
+        boolean xFlag;
+        boolean oFlag;
+
+        // Rows
         for (int row = 0; row < ROWS; row++) {
-            line = board[row][0] + board[row][1] + board[row][2];
-            if (line.contains("X") && line.contains("O")) {
-                blocked++;
+            xFlag = false;
+            oFlag = false;
+            if (board[row][0].equals("X") || board[row][1].equals("X") || board[row][2].equals("X")) {
+                xFlag = true;
+            }
+            if (board[row][0].equals("O") || board[row][1].equals("O") || board[row][2].equals("O")) {
+                oFlag = true;
+            }
+            if (!xFlag || !oFlag) {
+                retVal = false;
             }
         }
+
+        // Columns
         for (int col = 0; col < COLS; col++) {
-            line = board[0][col] + board[1][col] + board[2][col];
-            if (line.contains("X") && line.contains("O")) {
-                blocked++;
+            xFlag = false;
+            oFlag = false;
+            if (board[0][col].equals("X") || board[1][col].equals("X") || board[2][col].equals("X")) {
+                xFlag = true;
+            }
+            if (board[0][col].equals("O") || board[1][col].equals("O") || board[2][col].equals("O")) {
+                oFlag = true;
+            }
+            if (!xFlag || !oFlag) {
+                retVal = false;
             }
         }
-        line = board[0][0] + board[1][1] + board[2][2];
-        if (line.contains("X") && line.contains("O")) {
-            blocked++;
+
+        // Diagonal 1
+        xFlag = false;
+        oFlag = false;
+        if (board[0][0].equals("X") || board[1][1].equals("X") || board[2][2].equals("X")) {
+            xFlag = true;
         }
-        line = board[0][2] + board[1][1] + board[2][0];
-        if (line.contains("X") && line.contains("O")) {
-            blocked++;
+        if (board[0][0].equals("O") || board[1][1].equals("O") || board[2][2].equals("O")) {
+            oFlag = true;
         }
-        boolean retVal = false;
-        if (blocked == 8) {
-            retVal = true;
+        if (!xFlag || !oFlag) {
+            retVal = false;
         }
+
+        // Diagonal 2
+        xFlag = false;
+        oFlag = false;
+        if (board[0][2].equals("X") || board[1][1].equals("X") || board[2][0].equals("X")) {
+            xFlag = true;
+        }
+        if (board[0][2].equals("O") || board[1][1].equals("O") || board[2][0].equals("O")) {
+            oFlag = true;
+        }
+        if (!xFlag || !oFlag) {
+            retVal = false;
+        }
+
         return retVal;
     }
 }
